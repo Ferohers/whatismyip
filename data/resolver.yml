@@ -1,0 +1,8 @@
+---
+domain: dns.YOURDOMAIN.COM
+redirect_port: ":80"
+resource_records:
+  - "1800 IN SOA xns.YOURDOMAIN.COM. hostmaster.YOURDOMAIN.COM. 1 10000 2400 604800 1800"
+  - "3600 IN NS xns.YOURDOMAIN.COM."
+ipv4:
+  - "YOUR.EXTERNAL.IP"

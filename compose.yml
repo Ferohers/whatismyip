@@ -1,0 +1,18 @@
+services:
+  whatismyip:
+    image: dcarrillo/whatismyip:latest
+    container_name: whatismyip
+    ports:
+      - "80:80"      # HTTP API
+      - "53:53/tcp"  # DNS over TCP
+      - "53:53/udp"  # DNS over UDP
+    volumes:
+      - ./data/GeoLite2-City.mmdb:/tmp/GeoIP2-City-Test.mmdb:ro
+      - ./data/GeoLite2-ASN.mmdb:/tmp/GeoLite2-ASN-Test.mmdb:ro
+      - ./data/resolver.yml:/data/resolver.yml:ro
+    command: >
+      -geoip2-city /tmp/GeoIP2-City-Test.mmdb
+      -geoip2-asn /tmp/GeoLite2-ASN-Test.mmdb
+      -resolver /data/resolver.yml
+      -bind :80
+    restart: unless-stopped
